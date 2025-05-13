@@ -4,9 +4,9 @@ QTRSensors qtr;
 const uint8_t SensorCount =6;
 uint16_t sensorValues[SensorCount];
 int E1 = 6;
-int M1 = 7;
+int M1 = 7; // dreta
 int E2 = 5;
-int M2 = 4;
+int M2 = 4; // esquerra
 void avanzar(){
   analogWrite(E1, 255); // difèrencia de 5 
   analogWrite(E2, 255);
@@ -58,6 +58,10 @@ void setup()
 }
 void loop() {
 
+    uint16_t posicion = qtr.readLineBlack(sensorValues);
+
+    Serial.println(posicion);
+    delay(250);
 
 
 
