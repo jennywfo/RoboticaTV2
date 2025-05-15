@@ -7,7 +7,7 @@ int E1 = 6;
 int M1 = 7; // dreta
 int E2 = 5;
 int M2 = 4; // esquerra
-int vel_base = 180;
+int vel_base = 130;
 int vel_esq = 0;
 int vel_dret = 0;
 void avanzar(){
