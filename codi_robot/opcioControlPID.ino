@@ -5,15 +5,21 @@
 
 //Definicio variables i constants
 
-QTRSensors qtr;
+// QTRSensors qtr;
 const uint8_t SensorCount = 6;
 uint16_t sensorValues[SensorCount];
 
-int E1 = 6, M1 = 7, E2 = 5, M2 = 4; //Pins al Arduino. M1 = Motor dreta, M2 = MotorEsquerra
+int E1 = 6;
+int M1 = 7;
+int E2 = 5;
+int M2 = 4; //Pins al Arduino. M1 = Motor dreta, M2 = MotorEsquerra
 
-const int vel_base = 180, centre = 2500; //Velocitat robot i valor quan el robot esta centrat amb la linea, centre = 2500
+const int vel_base = 180;
+const int centre = 2500; //Velocitat robot i valor quan el robot esta centrat amb la linea, centre = 2500
 
-int vel_motor, vel_esq = 0, vel_dret = 0; // Definir velocitats de entrada
+int vel_motor;
+int vel_esq = 0;
+int vel_dret = 0; // Definir velocitats de entrada
 
 int error = 0, ultimError = 0;
 int kp = 0.2, ki = 0.3, kd = 0.1; //kp: Com de bruscs son els girs | ki: Aumenta el gir si el error es persistent | kd: Limita la velocitat del gir
