@@ -16,7 +16,7 @@ const int vel_base = 220, centre = 2500; //Velocitat robot i valor quan el robot
 int vel_motor, vel_esq = 0, vel_dret = 0; // Definir velocitats de entrada
 
 int error = 0, ultimError = 0;
-double kp = 0.2, ki = 0.01, kd = 0.25; //kp: Com de bruscs son els girs | ki: Aumenta el gir si el error es persistent | kd: Limita la velocitat del gir
+double kp = 0., ki = 0.01, kd = 0.25; //kp: Com de bruscs son els girs | ki: Aumenta el gir si el error es persistent | kd: Limita la velocitat del gir
 int integral = 0, derivatiu = 0;
 
 void blink(){
