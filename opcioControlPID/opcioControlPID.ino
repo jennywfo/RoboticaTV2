@@ -9,27 +9,24 @@ QTRSensors qtr;
 const uint8_t SensorCount = 6;
 uint16_t sensorValues[SensorCount];
 
-int E1 = 6, M1 = 7, E2 = 5, M2 = 4; //Pins al Arduino. M1 = Motor dreta, M2 = MotorEsquerra
+int E1 = 6, M1 = 7, E2 = 5, M2 = 4, LED_esq = 13, LED_dret = 11; //Pins al Arduino. M1 = Motor dreta, M2 = MotorEsquerra
 
-const int vel_base = 220, centre = 2500; //Velocitat robot i valor quan el robot esta centrat amb la linea, centre = 2500
+const int vel_base = 200, centre = 2500; //Velocitat robot i valor quan el robot esta centrat amb la linea, centre = 2500
 
 int vel_motor, vel_esq = 0, vel_dret = 0; // Definir velocitats de entrada
 
 int error = 0, ultimError = 0;
-double kp = 0., ki = 0.01, kd = 0.25; //kp: Com de bruscs son els girs | ki: Aumenta el gir si el error es persistent | kd: Limita la velocitat del gir
+double kp = 0.2, ki = 0.004, kd = 0.35; //kp: Com de bruscs son els girs | ki: Aumenta el gir si el error es persistent | kd: Limita la velocitat del gir
 int integral = 0, derivatiu = 0;
 
-void blink(){
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(1000);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
-}
+
 void setup(){
   //Definir pins
   pinMode(M1, OUTPUT);
   pinMode(M2, OUTPUT);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_esq,OUTPUT);
+  pinMode(LED_dret,OUTPUT);
 
   //Configurar sensors
   qtr.setTypeRC();
@@ -74,6 +71,8 @@ void loop() {
   Serial.println(posicion);
   Serial.println(vel_dret);
   Serial.println(vel_esq);
+
+
   Serial.println();
   Serial.println();
 
@@ -81,6 +80,19 @@ void loop() {
   analogWrite(E1, constrain(vel_dret,0,vel_base));  
   analogWrite(E2, constrain(vel_esq,0,vel_base));
 
+  if(vel_esq > vel_dret){
+      digitalWrite(LED_esq,HIGH);
+      digitalWrite(LED_dret,LOW);
+  }else if(vel_esq < vel_dret){
+      digitalWrite(LED_esq,LOW);
+      digitalWrite(LED_dret,HIGH);
+  }else if (vel_esq ==0 &&  vel_dret== 0){
+      digitalWrite(LED_esq,LOW);
+      digitalWrite(LED_dret,LOW);
+  }else{
+      digitalWrite(LED_esq,HIGH);
+      digitalWrite(LED_dret,HIGH);
+  }
   //Delay entre canvis de velocitats als rodes.
   delay(2);
 }
